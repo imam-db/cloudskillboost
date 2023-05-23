@@ -1,5 +1,6 @@
-1ST TASK-----------------------------------------------------------------------------------------------------
+### 1st Task - Create a cleaned copy of the data in
  
+```sql
 CREATE OR REPLACE TABLE
 taxirides.<Table_Name_as_mention_in_lab> AS
 SELECT
@@ -24,11 +25,13 @@ AND pickup_latitude > 37
 AND pickup_latitude < 45
 AND dropoff_latitude > 37
 AND dropoff_latitude < 45
-AND passenger_count > 3    [Change_as_mention_in_lab]
+AND passenger_count > 3    [Change_as_mention_in_lab];
+```
  
  
-2ND TASK ---------------------------------------------------------------------------------------------------
+### 2nd Task - Create BigQuery ML model Fare with RMSE 10 or less
  
+```sql
 CREATE OR REPLACE MODEL taxirides.<Model Name_as_mention_in_lab>
 TRANSFORM(
 * EXCEPT(pickup_datetime)
@@ -40,12 +43,15 @@ TRANSFORM(
 OPTIONS(input_label_cols=[<Fare Amount_as_mention_in_lab>'], model_type='linear_reg')
 AS
  
-SELECT * FROM taxirides.<Table_Name_as_mention_in_lab>
+SELECT * FROM taxirides.<Table_Name_as_mention_in_lab>;
+```
  
-3RD TASK -----------------------------------------------------------------------------------------------------
- 
+### 3rd Task - Perform batch predictions and store in a new table 2015_fare_amount_predictions
+
+```sql
 CREATE OR REPLACE TABLE taxirides.2015_fare_amount_predictions
 AS
 SELECT * FROM ML.PREDICT(MODEL taxirides.<Model Name_as_mention_in_lab>,(
 SELECT * FROM taxirides.report_prediction_data)
-)
+);
+```
